@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title>Custom Element simples</title>
+</head>
+<body>
+
+<h3>Custom element simples - fora</h3>
+
+<custom-element>
+	<h3>custom element simples - slot</h3>
+</custom-element>
+	
+<script>
+class CustomElementClass extends HTMLElement
+{
+	constructor()
+	{
+		super();
+		let shadowRoot = this.attachShadow({mode: 'open'});
+
+		shadowRoot.innerHTML = `	
+			<style>
+				h3{
+					color: #ff9100;
+					font-size: 2rem;
+				}
+			</style>
+
+			<h3>Hello world! - shadowDom</h3>
+			<slot></slot>
+		`;
+	}
+}
+
+if(!'customElements' in window) {
+	console.error( new Error('Seu browser não suporta a customElements') );
+}
+
+customElements.define('custom-element', CustomElementClass);
+
+</script>
+</body>
+</html>
